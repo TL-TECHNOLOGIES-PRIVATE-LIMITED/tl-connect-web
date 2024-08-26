@@ -1,0 +1,748 @@
+import React, { useState } from 'react';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+import SocialMediaIcons from './SocialMediaIcons';
+import { FaFacebookF, FaInstagram, FaLinkedin, FaPinterest, FaWhatsapp, FaYoutube } from 'react-icons/fa6';
+import { SiGooglemybusiness } from 'react-icons/si';
+import logo from '../img/Logo-TL.png'
+import CountrySelector from './countrySelector';
+import TooltipButton from './ToolTipButton';
+import { FaAsterisk } from "react-icons/fa";
+import { motion } from 'framer-motion';
+import { FaLocationDot } from "react-icons/fa6";
+import {  products, service } from '../constants/datas';
+import toast from 'react-hot-toast';
+import { FaGlobeAmericas } from "react-icons/fa";
+import { RiServiceFill } from "react-icons/ri";
+import { useNavigate } from 'react-router-dom';
+
+
+const ContactForm = () => {
+  const [phone, setPhone] = useState('');
+  const [items,setItems]=useState([])
+  const [selectedProducts,setSelectedProduct]=useState([])
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    businessModel: '',
+    selectedProducts:"",
+    location: ''
+  });
+
+  const [error, setError] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: '',
+    businessModel: '',
+    services: '',
+    location: '',
+    items:"",
+    selectedProducts:""
+  });
+
+  const handleService = (e) => {
+    const selectedService = e.target.value;
+    if (items.includes(selectedService)) {
+      return;
+    }
+    setItems((prevItems) => [...prevItems, selectedService]);
+  };
+  
+  const handleProducts = (e) => {
+    const selectedProduct = e.target.value;
+    if (selectedProducts.includes(selectedProduct)) {
+      return;
+    }
+    setSelectedProduct((prevProducts) => [...prevProducts, selectedProduct]);
+  };
+  
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    // setPhone(e.target.value); // Update the phone number separately if needed
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let hasError = false;
+    let newError = { ...error };
+
+    // Validate the name field
+    const namePattern = /^[A-Za-z\s]{3,}$/;
+
+    if (!namePattern.test(formData.name)) {
+      newError.name = "Name cannot be empty.";
+      hasError = true;
+    } else {
+      newError.name = "";
+    }
+
+    // Validate the email field
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(formData.email)) {
+      newError.email = "Email must be in the format example@domain.com.";
+      hasError = false;
+    } else {
+      newError.email = "";
+    }
+    
+    // Validate the phone field
+    const normalizedPhoneNumber = phone.replace(/\D/g, "");
+
+    // Example: US phone numbers with +1 country code should be followed by 10 digits
+    const usPhonePattern = /^1\d{10}$/;  // Matches +1 followed by 10 digits
+    const internationalPhonePattern = /^\d{4,12}$/; // Matches international numbers with or without country code
+  
+    // Validate phone number
+    if (usPhonePattern.test(normalizedPhoneNumber) || internationalPhonePattern.test(normalizedPhoneNumber)) {
+      newError.phone = ""; // Valid phone number
+    } else {
+      newError.phone = "Phone number should only contain numbers."; // Invalid phone number
+      hasError = true;
+    }
+    // Validate the message field
+    if (formData.message.length <= 0) {
+      newError.message = "Message cannot be blank.";
+      hasError = true;
+    } else {
+      newError.message = "";
+    }
+
+    // Validate the business model field
+    if (!formData.businessModel.length>0) {
+      newError.businessModel = "Please select a business model";
+      hasError = true;
+    } else {
+      newError.businessModel = "";
+    }
+    // Validate the business model field
+    if (!selectedProducts.length>0) {
+      newError.selectedProducts = "Please choose a product or service.";
+      if(error.items.length>0)
+      hasError = true;
+    } else {
+      newError.selectedProducts = "";
+    }
+    // Validate the business model field
+    if (!items.length>0) {
+      newError.items = "Please choose a product or service.";
+      if(error.selectedProducts.length>0)
+        hasError = true;
+    } else {
+      newError.items = "";
+    }
+
+    // Validate the services field
+    if (formData.services === '') {
+      newError.services = "Service selection is mandatory.";
+      hasError = true;
+    } else {
+      newError.services = "";
+    }
+
+    // Validate the location field
+    if (formData.location.length<=0) {
+      newError.location = "Country selection is required.";
+      hasError = true;
+    } else {
+      newError.location = "";
+    }
+
+    setError(newError);
+
+    if (hasError) {
+        toast.success(
+      <span className="text-xs font-bold">
+       Please check the all required fields
+      </span>,
+      {
+        duration: 3000, // Duration in milliseconds
+        icon: '❌', // Custom icon
+      }
+    );
+      return; // Stop form submission if there's an error
+    }
+
+    // If no errors, proceed with form submission
+    const url = `https://api.whatsapp.com/send?phone=919061432814&text=${encodeURIComponent(
+      `*Name:* ${formData.name}\n` +
+      `*Email:* ${formData.email}\n` +
+      `*Phone:* +${parseInt(phone)}\n` +
+      `*Country:* ${formData.location}\n` +
+      `*Business:* ${formData.businessModel}\n` +
+      `*Products:*\n${selectedProducts.map(product => `• ${product}`).join("\n")}\n` +
+      `*Services:*\n${items.map(service => `• ${service}`).join("\n")}\n\n` +
+      `*Message:* ${formData.message}`
+    )}`;
+    
+
+    
+    
+    toast.success(
+      <span className="text-xs font-bold">
+        Thank you for getting in touch!<br/> We’ll get back to you soon.
+      </span>,
+      {
+        duration: 5000, // Duration in milliseconds
+        icon: '😍', // Custom icon
+      }
+    );
+    
+    setTimeout(() => {
+      
+      window.open(url, '_blank');
+    }, 3000);
+    console.log("Form submitted successfully:", formData);
+  };
+
+  const removeProduct = (product) => {
+    setSelectedProduct(selectedProducts.filter((item) => item !== product));
+  };
+
+  const removeService = (service) => {
+    setItems(items.filter((item) => item !== service));
+  };
+
+  const navigate = useNavigate("/services")
+
+  return (
+    <div className="custom-scrollbar  p-4 w-full h-full backdrop-blur-xl text-xs overflow-y-auto text-black bg-white">
+    <form onSubmit={handleSubmit}  className="md:space-y-2 space-y-3 max-w-lg mx-auto flex flex-col justify-between h-full w-full ">
+    <h1 className='text-3xl font-bold space-y-2 '>Get in touch </h1>
+    <p className='md:text-sm text-[10px] text-black flex items-center'>Please fill out all required fields  (<FaAsterisk  className='text-red-500 text-[7px] '/>) to ensure a smooth process.</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="  gap-1  text-xs flex items-center font-bold text-gray-700  ps-4">
+            
+            
+          <FaAsterisk  className='text-red-500 text-sm pe-2' />Name <TooltipButton
+              icon
+              content={
+                <p>
+                   Enter your full name as it appears on official documents.
+                </p>
+              }
+            /></label>
+          <input
+            type="text"
+            name="name"
+            placeholder='Enter your full name'
+            value={formData.name}
+            onChange={handleChange}
+            
+            className="mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          />
+          <p className='text-[red] ps-4 text-[10px] '>{error.name}</p>
+          
+        </div>
+        <div>
+          <label className="  gap-1 flex items-center text-xs font-bold text-gray-700  ps-4"> <FaAsterisk  className='text-transparent text-sm pe-2'/> Email <TooltipButton
+                content={
+                  <p>
+                    We'll use this email to contact you.
+                  </p>
+                }
+              /></label>
+          <input
+            // type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder='Enter your email'
+            
+            className="mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          />
+                    <p className='text-[red] ps-4 text-[10px] '>{error.email}</p>
+
+        </div>
+      </div>
+  
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+       <div>
+            <label className="  gap-1 flex items-center text-xs font-bold text-gray-700  ps-4"> <FaAsterisk  className='text-red-500 text-sm pe-2'/> Phone Number   <TooltipButton
+                content={
+                  <p>
+                   Provide your contact number including country code.
+                  </p>
+                }
+              /></label>
+         
+            <PhoneInput
+  country={'in'}
+  value={phone}
+  onChange={setPhone}
+  containerStyle={{ width: '100%', marginTop: '4px', borderRadius: '30px' }}
+  inputStyle={{ width: '100%', borderRadius: '30px',   fontFamily: '"Outfit", sans-serif',fontSize:"12px" }}
+  inputProps={{
+    name: 'phone',
+    // required: true,
+    // autoFocus: true,
+    placeholder:"Enter your phone number"
+  }}
+/>
+<p className='text-[red] ps-4 text-[10px] '>{error.phone}</p>
+
+
+          </div>
+        <div>
+          <label className="  gap-1 flex items-center text-xs font-bold text-gray-700  ps-4"> <FaAsterisk  className='text-red-500 text-sm pe-2'/> Country <TooltipButton
+  content={
+    <p>
+       Select the country you are located in.
+    </p>
+  }
+  onClick={(e) => e.stopPropagation()}
+/>
+</label>
+         
+          <CountrySelector  name={"location"} onChange={handleChange} value={formData.location} />
+          <p className='text-[red] ps-4 text-[10px] '>{error.location}</p>
+
+        </div>
+      </div>
+  
+      
+  
+      <div>
+        <label className="  gap-1 flex items-center text-xs font-bold text-gray-700  ps-4"> <FaAsterisk  className='text-red-500 text-sm pe-2'/> Line of business<TooltipButton
+  content={
+    <p>
+       Choose the industry or field your business operates in.
+    </p>
+  }
+  onClick={(e) => e.stopPropagation()}
+/>
+</label>
+        <select
+          name="businessModel"
+          value={formData.businessModel}
+          onChange={handleChange}
+          
+          className="mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+        >
+          <option value="" className='text-blue font-bold'>Select your business</option>
+            <option value="agriculture">Agriculture</option>
+            <option value="automotive">Automotive</option>
+            <option value="banking-finance">Banking & Finance</option>
+            <option value="construction">Construction</option>
+            <option value="education">Education</option>
+            <option value="energy">Energy</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="food-beverage">Food & Beverage</option>
+            <option value="healthcare">Healthcare</option>
+            <option value="hospitality">Hospitality</option>
+            <option value="information-technology">
+              Information Technology
+            </option>
+            <option value="insurance">Insurance</option>
+            <option value="manufacturing">Manufacturing</option>
+            <option value="media">Media</option>
+            <option value="pharmaceuticals">Pharmaceuticals</option>
+            <option value="real-estate">Real Estate</option>
+            <option value="retail">Retail</option>
+            <option value="telecommunications">Telecommunications</option>
+            <option value="transportation">Transportation</option>
+            <option value="travel-tourism">Travel & Tourism</option>
+        </select>
+        <p className='text-[red] ps-4 text-[10px] '>{error.businessModel}</p>
+
+      </div>
+  
+      {/* <div>
+        <label className="  gap-1 flex items-center text-xs font-bold text-gray-700  ps-4"> <FaAsterisk  className='text-red-500 text-sm pe-2'/> Services <TooltipButton
+  content={
+    <p>
+       You can select multiple services that you are interested in.
+      <br />
+      
+      <br />
+       Choosing relevant services helps us understand your requirements better.
+    </p>
+  }
+  onClick={(e) => e.stopPropagation()}
+/>
+</label>
+        <select
+          name="services"
+          value={formData.services}
+          onChange={handleService}
+          required={false}
+
+          className="mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+        >
+            <option value="" disabled selected>
+              Select a service
+            </option>
+            <option
+              value="Branding (Logo,Packaging,Label,Letterhead)"
+              className="text-red-400"
+            >
+              Branding (Logo,Packaging,Label,Letterhead)
+            </option>
+            <option value="Cloud Services (Aws,Azure)" className="text-red-400">
+              Cloud Services (Aws,Azure)
+            </option>
+            <option
+              value="Digital Marketing (FB,GOOGLE,INTAGRAM,YOUTUBE,LINKEDIN)"
+              className="text-red-400"
+            >
+              Digital Marketing (FB,GOOGLE,INTAGRAM,YOUTUBE,LINKEDIN)
+            </option>
+            <option
+              value="Domain Registration (DNS / SSL management)"
+              className="text-red-400"
+            >
+              Domain Registration (DNS / SSL management)
+            </option>
+            <option
+              value="Hosting (SQL,MySql,FTP,Webmail)"
+              className="text-red-400"
+            >
+              Hosting (SQL,MySql,FTP,Webmail)
+            </option>
+            <option
+              value="E-commerce Website (checkout/payment integration)"
+              className="text-red-400"
+            >
+              E-commerce Website (checkout/payment integration)
+            </option>
+            <option value="Email Exchange (google)" className="text-red-400">
+              Email Exchange (google)
+            </option>
+            <option value="SEO (Basic & Advanced)" className="text-red-400">
+              SEO (Basic & Advanced)
+            </option>
+            <option
+              value="Payment Gateway Integration"
+              className="text-red-400"
+            >
+              Payment Gateway Integration
+            </option>
+            <option value="Social Media Management" className="text-red-400">
+              Social Media Management
+            </option>
+            <option value="Software Counseling" className="text-red-400">
+              Software Counseling
+            </option>
+            <option
+              value="Video Management (Editing & Streaming)"
+              className="text-red-400"
+            >
+              Video Management (Editing & Streaming)
+            </option>
+            <option
+              value="Websites (One page & Multi-page)"
+              className="text-red-400"
+            >
+              Websites (One page & Multi-page)
+            </option>
+            <option
+              value="Mobile App Development (IOS / Android)"
+              className="text-red-400"
+            >
+              Mobile App Development (IOS / Android)
+            </option>
+        </select>
+        <div className="w-full flex-wrap flex gap-3 py-2">
+      {items.map((item, index) => (
+        <motion.div
+          key={index} // Unique key for each item
+          className="px-2 py-1 text-xs font-sans font-bold border text-red-500 rounded-full border-stone-500"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          
+
+        <p className="w-fit">{item}</p>
+        </motion.div>
+      ))}
+    </div>
+        <p className='text-[red] ps-4 text-[10px] '>{error.services}</p>
+
+      </div> */}
+
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
+      {/* Products Section */}
+      <div>
+      <label className="gap-1 text-xs flex items-center justify-between font-bold text-gray-700 ps-4">
+  <div className="flex items-center gap-1">
+    <FaAsterisk className="text-red-500 text-sm pe-2" />
+    Products 
+    <TooltipButton
+      icon
+      content={
+        <p>
+          Select the Products you're interested in
+        </p>
+      }
+    />
+  </div>
+  <div className='flex  justify-between items-center gap-2'>
+
+  <span className="text-red-500 bg-stone-200 px-3 p-1 rounded-full font-bold text-[14px]">
+        {selectedProducts.length}&nbsp;/&nbsp;{products.length}{" "}
+      </span> 
+  {selectedProducts.length > 0 && (
+    <button
+      onClick={() => setSelectedProduct([])}
+      type="button"
+      className="bg-black px-3 p-1 rounded-full text-white hover:bg-slate-700 duration- transition-all"
+    >
+      
+      Clear all
+    </button>
+  )}
+  </div>
+</label>
+
+
+        <select
+          name="products"
+          value={formData.products}
+          onChange={handleProducts}
+          className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+        >
+          <option value="" disabled>
+            Select a product
+          </option>
+          {products
+            .sort((a, b) => a.localeCompare(b))
+            .map((product, index) => (
+              <option
+                key={index}
+                value={product}
+                disabled={selectedProducts.includes(product)}
+                              className={selectedProducts.includes(product) ? 'bg-gray-400' : ''}
+
+              >
+                {product}
+              </option>
+            ))}
+        </select>
+
+        <div className="w-full flex-wrap flex gap-2 ps-2 py-1">
+          {selectedProducts.map((item, index) => (
+            <motion.div
+              key={index}
+              className="text-xs font-sans font-bold flex items-start justify-between gap-2 w-full text-blue-700 rounded-full"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="flex gap-1 "><RiServiceFill  className="text-black pt-1 text-sm" /> 
+
+
+                           <p className="w-fit">{item}</p></div>
+
+              <button
+              type="button"
+                onClick={() => removeProduct(item)}
+                className="ml-2 text-xs text-gray-500 hover:text-red-500"
+              >
+                ✕
+              </button>
+            </motion.div>
+          ))}
+        </div>
+       
+      </div>
+
+      {/* Services Section */}
+      <div>
+      <label className="relative flex items-center justify-between">
+  <div className="flex items-center gap-1 text-xs font-bold text-gray-700 ps-4">
+    <FaAsterisk className="text-red-500 text-sm pe-2" />
+    Services
+   
+    <TooltipButton
+      icon
+      content={<p>Select the Services you're interested in</p>}
+    />
+  </div>
+  <div className='flex  justify-between items-center gap-2'>
+  <span className="text-red-500 bg-stone-200 px-3 p-1 rounded-full font-bold text-[14px]">
+      {items.length}&nbsp;/&nbsp;{service.length}{" "}
+    </span> 
+  {items.length > 0 && (
+    <button
+      onClick={() => setItems([])}
+      type="button"
+      className="bg-black px-3 p-1 rounded-full text-white hover:bg-slate-700 duration- transition-all du"
+    >
+      Clear all
+    </button>
+  )}
+</div>
+</label>
+
+        <select
+          name="services"
+          value={formData.services}
+          onChange={handleService}
+          className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+        >
+          <option value="" disabled>
+            Select a service
+          </option>
+          {service
+            .sort((a, b) => a.localeCompare(b))
+            .map((service, index) => (
+              <option
+                key={index}
+                value={service}
+              className={items.includes(service) ? 'bg-gray-400' : ''}
+                disabled={items.includes(service)}
+              >
+                {service}
+              </option>
+            ))}
+        </select>
+ <div className="w-full flex-wrap flex gap-2  ps-2 py-1">
+
+          {items.map((item, index) => (
+            <motion.div
+              key={index}
+              className="text-xs font-sans font-bold w-full flex items-start justify-between gap-2 text-blue-700 rounded-full"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+             
+              <div className="flex gap-1 ">
+              
+              <div> <RiServiceFill  className="text-black pt-1 text-sm" /> </div>
+
+
+                           <p className="w-fit">{item}</p></div>
+              <button
+              type="button"
+                onClick={() => removeService(item)}
+                className="ml-2 text-xs text-gray-500 hover:text-red-500"
+              >
+                ✕
+              </button>
+            </motion.div>
+          ))}
+        </div>
+      
+       
+      </div>
+      {(error.selectedProducts.length > 0 && error.items.length > 0) && (
+  <p className="text-[red] w-full  ps-4 text-[10px]">
+    {error.selectedProducts}
+  </p>
+)}
+
+    </div>
+
+      <div>
+        <label className="  gap-1 flex items-center text-xs font-bold text-gray-700  ps-4"> <FaAsterisk  className='text-red-500 text-sm pe-2'/> Message <TooltipButton
+          content={
+            <p>
+            Let us know how we can assist you.
+            </p>
+          }
+          onclick={(e) => e.stopPropagation()}
+        />
+ <span className="text-blue-500 px-4 font-normal">
+        {formData.message.length}/{100} letters left
+      </span>   
+
+        </label>
+        <textarea
+          name="message"
+          value={formData.message}
+          placeholder='Feel free to ask us ...'
+          onChange={handleChange}
+          
+          className="mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+        />
+                  <p className='text-[red] ps-4 text-[10px] '>{error.message}</p>
+
+      </div>
+      <div className='w-full flex   justify-between'>
+      <button className="text-stone-950 font-bold w-fit flex items-center p-1 gap-2  hover:scale-105 transition-all duration-300 ease-in-out border-stone-950 bg-opacity-20  bg-black rounded-full" type='button' onClick={()=>navigate("/products&services")} >
+<img src={logo} className="h-8 w-auto" alt="" />
+<h1>Products & Services</h1>
+      </button>
+
+        <button
+          type="submit"
+          className="text-xl py-1 px-4 w-[170px] bg-[red] hover:px-2 transition-all duration-300 ease-in-out text-white font-semibold rounded-full outline-yellow-400 outline-1 border-2 border-black shadow-sm hover:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-opacity-50"
+        >
+          lets connect !
+        </button>
+      </div>
+      <div className="flex justify-evenly items-center w-full flex-wrap text-black  ">
+          <span>follow us</span>
+          <SocialMediaIcons
+            icon={
+              <FaWhatsapp className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-green-500" />
+            }
+            link={"https://wa.me/+919061432814?text=Hello,%20I%20am%20interested%20to%20know%20more%20about%20your%20service"}
+          />
+          <SocialMediaIcons
+            icon={
+              <FaGlobeAmericas
+              className=" md:text-2xl text-lg hover:text-black transition-all duration-300 ease-in-out text-stone-600" />
+            }
+            link={"http://sangitl2020-001-site7.atempurl.com/"}
+          />
+          <SocialMediaIcons
+            icon={
+              <SiGooglemybusiness
+              className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-blue-600" />
+            }
+            link={"https://g.co/kgs/kehDd8b"}
+          />
+             <SocialMediaIcons
+            icon={
+              <FaLocationDot
+              className=" md:text-2xl text-lg hover:text-black transition-all duration-300 ease-in-out text-blue-600" />
+            }
+            link={"https://www.google.com/maps/place/TL+TECHNOLOGIES+PRIVATE+LIMITED/@8.5795247,76.8567485,16z/data=!4m6!3m5!1s0x3b05bfb13fa37fc1:0xf89d4bd32e84246f!8m2!3d8.5799619!4d76.8632868!16s%2Fg%2F11p5shtd3y?entry=ttu"}
+          />
+          <SocialMediaIcons
+            icon={
+              <FaFacebookF className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-blue-500" />
+            }
+            link={"https://www.facebook.com/tltechnologiespvtltd"}
+          />
+          <SocialMediaIcons
+            icon={
+              <FaInstagram className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-pink-500" />
+            }
+            link={"https://www.instagram.com/tltechnologiespvtltd/"}
+          />
+          <SocialMediaIcons
+            icon={
+              <FaYoutube className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-red-500" />
+            }
+            link={"https://www.youtube.com/channel/UC66DHUJ0uCcSbAqhppInx5Q"}
+          />
+           <SocialMediaIcons
+            icon={
+              <FaPinterest className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-red-600" />
+            }
+            link={"https://in.pinterest.com/tltechnologiespvtltd/"}
+          />
+          <SocialMediaIcons
+            icon={
+              <FaLinkedin className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-blue-600" />
+            }
+            link={"https://www.linkedin.com/company/tltechnologiespvtltd/"}
+          />
+          
+       
+       
+        </div>
+    </form>
+  </div>
+  
+  );
+};
+
+export default ContactForm;
