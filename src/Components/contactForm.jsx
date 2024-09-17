@@ -15,6 +15,8 @@ import toast from 'react-hot-toast';
 import { FaGlobeAmericas } from "react-icons/fa";
 import { RiServiceFill } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom';
+import SuccessModal from './CustomModal';
+import ChatbotModal from './ChatBot';
 
 
 const ContactForm = () => {
@@ -41,7 +43,12 @@ const ContactForm = () => {
     items:"",
     selectedProducts:""
   });
-
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState('success'); // 'success' or 'error'
+  const [message, setMessage] = useState('');
+  const closeModal = () => {
+    setShowModal(false);
+  };
   const handleService = (e) => {
     const selectedService = e.target.value;
     if (items.includes(selectedService)) {
@@ -153,15 +160,9 @@ const ContactForm = () => {
     setError(newError);
 
     if (hasError) {
-        toast.success(
-      <span className="text-xs font-bold">
-       Please check the all required fields
-      </span>,
-      {
-        duration: 3000, // Duration in milliseconds
-        icon: '❌', // Custom icon
-      }
-    );
+      setMessage('There was an issue with your submission');
+      setModalType('error');
+      setShowModal(true);
       return; // Stop form submission if there's an error
     }
 
@@ -179,16 +180,10 @@ const ContactForm = () => {
     
 
     
-    
-    toast.success(
-      <span className="text-xs font-bold">
-        Thank you for getting in touch!<br/> We’ll get back to you soon.
-      </span>,
-      {
-        duration: 5000, // Duration in milliseconds
-        icon: '😍', // Custom icon
-      }
-    );
+    setShowModal(true); // Show the success modal
+    setMessage('We’ve received your submission and will contact you shortly.');
+    setModalType('success');
+    setShowModal(true);
     
     setTimeout(() => {
       
@@ -209,6 +204,13 @@ const ContactForm = () => {
 
   return (
     <div className="custom-scrollbar  p-4 w-full h-full backdrop-blur-xl text-xs overflow-y-auto text-black bg-white">
+      <ChatbotModal/>
+    <SuccessModal 
+        showModal={showModal} 
+        closeModal={() => setShowModal(false)} 
+        modalType={modalType} 
+        message={message} 
+      />
     <form onSubmit={handleSubmit}  className="md:space-y-2 space-y-3 max-w-lg mx-auto flex flex-col justify-between h-full w-full ">
     <h1 className='text-3xl font-bold space-y-2 '>Get in touch </h1>
     <p className='md:text-sm text-[10px] text-black flex items-center'>Please fill out all required fields  (<FaAsterisk  className='text-red-500 text-[7px] '/>) to ensure a smooth process.</p>
@@ -349,120 +351,7 @@ const ContactForm = () => {
         <p className='text-[red] ps-4 text-[10px] '>{error.businessModel}</p>
 
       </div>
-  
-      {/* <div>
-        <label className="  gap-1 flex items-center text-xs font-bold text-gray-700  ps-4"> <FaAsterisk  className='text-red-500 text-sm pe-2'/> Services <TooltipButton
-  content={
-    <p>
-       You can select multiple services that you are interested in.
-      <br />
-      
-      <br />
-       Choosing relevant services helps us understand your requirements better.
-    </p>
-  }
-  onClick={(e) => e.stopPropagation()}
-/>
-</label>
-        <select
-          name="services"
-          value={formData.services}
-          onChange={handleService}
-          required={false}
 
-          className="mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
-        >
-            <option value="" disabled selected>
-              Select a service
-            </option>
-            <option
-              value="Branding (Logo,Packaging,Label,Letterhead)"
-              className="text-red-400"
-            >
-              Branding (Logo,Packaging,Label,Letterhead)
-            </option>
-            <option value="Cloud Services (Aws,Azure)" className="text-red-400">
-              Cloud Services (Aws,Azure)
-            </option>
-            <option
-              value="Digital Marketing (FB,GOOGLE,INTAGRAM,YOUTUBE,LINKEDIN)"
-              className="text-red-400"
-            >
-              Digital Marketing (FB,GOOGLE,INTAGRAM,YOUTUBE,LINKEDIN)
-            </option>
-            <option
-              value="Domain Registration (DNS / SSL management)"
-              className="text-red-400"
-            >
-              Domain Registration (DNS / SSL management)
-            </option>
-            <option
-              value="Hosting (SQL,MySql,FTP,Webmail)"
-              className="text-red-400"
-            >
-              Hosting (SQL,MySql,FTP,Webmail)
-            </option>
-            <option
-              value="E-commerce Website (checkout/payment integration)"
-              className="text-red-400"
-            >
-              E-commerce Website (checkout/payment integration)
-            </option>
-            <option value="Email Exchange (google)" className="text-red-400">
-              Email Exchange (google)
-            </option>
-            <option value="SEO (Basic & Advanced)" className="text-red-400">
-              SEO (Basic & Advanced)
-            </option>
-            <option
-              value="Payment Gateway Integration"
-              className="text-red-400"
-            >
-              Payment Gateway Integration
-            </option>
-            <option value="Social Media Management" className="text-red-400">
-              Social Media Management
-            </option>
-            <option value="Software Counseling" className="text-red-400">
-              Software Counseling
-            </option>
-            <option
-              value="Video Management (Editing & Streaming)"
-              className="text-red-400"
-            >
-              Video Management (Editing & Streaming)
-            </option>
-            <option
-              value="Websites (One page & Multi-page)"
-              className="text-red-400"
-            >
-              Websites (One page & Multi-page)
-            </option>
-            <option
-              value="Mobile App Development (IOS / Android)"
-              className="text-red-400"
-            >
-              Mobile App Development (IOS / Android)
-            </option>
-        </select>
-        <div className="w-full flex-wrap flex gap-3 py-2">
-      {items.map((item, index) => (
-        <motion.div
-          key={index} // Unique key for each item
-          className="px-2 py-1 text-xs font-sans font-bold border text-red-500 rounded-full border-stone-500"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          
-
-        <p className="w-fit">{item}</p>
-        </motion.div>
-      ))}
-    </div>
-        <p className='text-[red] ps-4 text-[10px] '>{error.services}</p>
-
-      </div> */}
 
 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
       {/* Products Section */}
@@ -676,34 +565,35 @@ const ContactForm = () => {
           lets connect !
         </button>
       </div>
-      <div className="flex justify-evenly items-center w-full flex-wrap text-black  ">
+     
+    <div className="flex justify-evenly items-center w-full flex-wrap text-black  ">
           <span>follow us</span>
           <SocialMediaIcons
             icon={
               <FaWhatsapp className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-green-500" />
             }
-            link={"https://wa.me/+919061432814?text=Hello,%20I%20am%20interested%20to%20know%20more%20about%20your%20service"}
+            link={"https://api.whatsapp.com/send/?phone=%2B919061432814&text=Hello%2C+I+am+interested+to+know+more+about+PRODUCTS+%26+SERVICES&type=phone_number&app_absent=0"}
           />
           <SocialMediaIcons
             icon={
               <FaGlobeAmericas
               className=" md:text-2xl text-lg hover:text-black transition-all duration-300 ease-in-out text-stone-600" />
             }
-            link={"http://sangitl2020-001-site7.atempurl.com/"}
+            link={"https://tltechnologies.net/"}
           />
           <SocialMediaIcons
             icon={
               <SiGooglemybusiness
               className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-blue-600" />
             }
-            link={"https://g.co/kgs/kehDd8b"}
+            link={"https://www.google.com/search?q=tltechnologies&rlz=1C1ONGR_enIN1100IN1100&oq=tltechnologies&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIPCAEQLhgKGK8BGMcBGIAEMgkIAhAAGAoYgAQyCggDEAAYgAQYogQyCggEEAAYgAQYogQyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQkzMDgzMWowajeoAgCwAgA&sourceid=chrome&ie=UTF-8"}
           />
              <SocialMediaIcons
             icon={
               <FaLocationDot
               className=" md:text-2xl text-lg hover:text-black transition-all duration-300 ease-in-out text-blue-600" />
             }
-            link={"https://www.google.com/maps/place/TL+TECHNOLOGIES+PRIVATE+LIMITED/@8.5795247,76.8567485,16z/data=!4m6!3m5!1s0x3b05bfb13fa37fc1:0xf89d4bd32e84246f!8m2!3d8.5799619!4d76.8632868!16s%2Fg%2F11p5shtd3y?entry=ttu"}
+            link={"https://maps.app.goo.gl/ruFTK9hWTrk4no1f7"}
           />
           <SocialMediaIcons
             icon={
@@ -721,7 +611,7 @@ const ContactForm = () => {
             icon={
               <FaYoutube className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-red-500" />
             }
-            link={"https://www.youtube.com/channel/UC66DHUJ0uCcSbAqhppInx5Q"}
+            link={"https://www.youtube.com/channel/UCUzgPAoF6HEyR2eH9vtj-5w?sub_confirmation=1"}
           />
            <SocialMediaIcons
             icon={

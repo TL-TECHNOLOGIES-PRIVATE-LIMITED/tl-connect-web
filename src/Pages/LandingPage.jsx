@@ -21,7 +21,7 @@ function LandingPage() {
     >
 
       <div className="bg-stone-950 bg-opacity-10 h-full w-full relative flex flex-col overflow-y-auto">
-        {/* <CookieConsent /> */}
+        <CookieConsent />
 
         <div className=" md:w-fit w-full  transform -translate-x-1/2 left-1/2 absolute ">
           <Navbar />
