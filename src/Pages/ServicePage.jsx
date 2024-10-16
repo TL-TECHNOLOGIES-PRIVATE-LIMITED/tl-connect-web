@@ -43,7 +43,7 @@ const TLServices = () => {
             <section className="fixed flex justify-between items-end top-0 md:px-10 px-4 py-4 w-full z-20">
                 <div className="flex gap-4 w-full items-center">
                     <div className="text-3xl h-fit w-fit rounded-full text-[50px]">
-                        <img src={logo} alt="" className="h-14 w-auto" />
+                        <img src="https://tltechnologies.net/assets/images/logo.svg" alt="" className="h-14 w-auto" />
                     </div>
                     <div className="md:text-[36px] text-xl font-bold text-[white] drop-shadow-md">
                         TL TECHNOLOGIES

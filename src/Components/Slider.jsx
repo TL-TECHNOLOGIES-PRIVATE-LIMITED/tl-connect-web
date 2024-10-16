@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { services, documents } from '../constants/datas'; // Import services and documents
 import tag from '../img/protag1.png';
@@ -7,6 +7,7 @@ import { IoCloseCircle } from 'react-icons/io5';
 import { FaFilePdf } from 'react-icons/fa6';
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import Typewriter from 'typewriter-effect';
+import { PDFViewer } from './Document';
 
 function Slider() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -108,11 +109,14 @@ function Slider() {
       {/* PDF Viewer or Coming Soon */}
       {isBrochureVisible && selectedDocument !== null ? (
         <div className="w-full h-full flex justify-center relative items-center">
-          <iframe
-            src={selectedDocument} // Show the selected PDF
-            className="w-full h-full"
-            title="Brochure"
-          />
+         <Suspense >
+            <iframe
+              src={selectedDocument} // Show the selected PDF
+              className="w-full h-full"
+              title="Brochure"
+            />
+          </Suspense>
+          
           {/* Close button */}
           <div className="absolute bottom-4 left-5">
             <button

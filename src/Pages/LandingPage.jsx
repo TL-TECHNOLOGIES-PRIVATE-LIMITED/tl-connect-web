@@ -4,6 +4,8 @@ import Slider from "../Components/Slider";
 import Navbar from "../Components/Navbar";
 import ContactForm from "../Components/contactForm";
 import CookieConsent from "../Components/cookieComponents";
+import { Suspense } from "react";
+import LoadingSpinner from "../Components/LoadingSpinner";
 
 function LandingPage() {
 
@@ -11,7 +13,8 @@ function LandingPage() {
  
 
   return (
-    <div
+    <Suspense fallback={<LoadingSpinner/>}>
+      <div
       className="h-screen flex flex-col justify-center items-center  "
       style={{
         backgroundImage: `url(${bg})`,
@@ -43,6 +46,7 @@ function LandingPage() {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }
 

@@ -7,7 +7,6 @@ const LoadingSpinner = () => {
       <div className="w-20 h-20  animate-pulse rounded-full ">
         <img src={logo} alt="logo tl" className='h-full w-auto ' />
       </div>
-      <h1 className='text-[red] text-sm'>TL TECHNOLOGIES</h1>
     </div>
   );
 };

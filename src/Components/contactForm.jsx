@@ -23,6 +23,7 @@ const ContactForm = () => {
   const [phone, setPhone] = useState('');
   const [items,setItems]=useState([])
   const [selectedProducts,setSelectedProduct]=useState([])
+  const [wurl,setWurl]=useState("")
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -185,10 +186,7 @@ const ContactForm = () => {
     setModalType('success');
     setShowModal(true);
     
-    setTimeout(() => {
-      
-      window.open(url, '_blank');
-    }, 3000);
+    setWurl(url)
     console.log("Form submitted successfully:", formData);
   };
 
@@ -204,12 +202,13 @@ const ContactForm = () => {
 
   return (
     <div className="custom-scrollbar  p-4 w-full h-full backdrop-blur-xl text-xs overflow-y-auto text-black bg-white">
-      <ChatbotModal/>
+      {/* <ChatbotModal/> */}
     <SuccessModal 
         showModal={showModal} 
         closeModal={() => setShowModal(false)} 
         modalType={modalType} 
         message={message} 
+        url={wurl}
       />
     <form onSubmit={handleSubmit}  className="md:space-y-2 space-y-3 max-w-lg mx-auto flex flex-col justify-between h-full w-full ">
     <h1 className='text-3xl font-bold space-y-2 '>Get in touch </h1>
@@ -233,8 +232,8 @@ const ContactForm = () => {
             placeholder='Enter your full name'
             value={formData.name}
             onChange={handleChange}
-            
-            className="mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+           
+            className={`mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 ${error.name.length>0&&"bg-red-100"} `}
           />
           <p className='text-[red] ps-4 text-[10px] '>{error.name}</p>
           
@@ -254,7 +253,7 @@ const ContactForm = () => {
             onChange={handleChange}
             placeholder='Enter your email'
             
-            className="mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className={`mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 ${error.email.length>0&&"bg-red-100"} `}
           />
                     <p className='text-[red] ps-4 text-[10px] '>{error.email}</p>
 
@@ -275,8 +274,8 @@ const ContactForm = () => {
   country={'in'}
   value={phone}
   onChange={setPhone}
-  containerStyle={{ width: '100%', marginTop: '4px', borderRadius: '30px' }}
-  inputStyle={{ width: '100%', borderRadius: '30px',   fontFamily: '"Outfit", sans-serif',fontSize:"12px" }}
+  containerStyle={{ width: '100%', marginTop: '4px', borderRadius: '30px',backgroundColor:error.email.length>0&&"#FEE2E2" }}
+  inputStyle={{ width: '100%', borderRadius: '30px',   fontFamily: '"Outfit", sans-serif',fontSize:"12px",backgroundColor:error.email.length>0&&"#FEE2E2" }}
   inputProps={{
     name: 'phone',
     // required: true,
@@ -299,7 +298,7 @@ const ContactForm = () => {
 />
 </label>
          
-          <CountrySelector  name={"location"} onChange={handleChange} value={formData.location} />
+          <CountrySelector  name={"location"} onChange={handleChange} error={error.location} value={formData.location} />
           <p className='text-[red] ps-4 text-[10px] '>{error.location}</p>
 
         </div>
@@ -322,7 +321,7 @@ const ContactForm = () => {
           value={formData.businessModel}
           onChange={handleChange}
           
-          className="mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          className={`mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 ${error.businessModel.length>0&&"bg-red-100"}`}
         >
           <option value="" className='text-blue font-bold'>Select your business</option>
             <option value="agriculture">Agriculture</option>
@@ -392,8 +391,8 @@ const ContactForm = () => {
           name="products"
           value={formData.products}
           onChange={handleProducts}
-          className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
-        >
+          className={`mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 ${error.selectedProducts.length>0&&"bg-red-100"} `}
+          >
           <option value="" disabled>
             Select a product
           </option>
@@ -471,7 +470,7 @@ const ContactForm = () => {
           name="services"
           value={formData.services}
           onChange={handleService}
-          className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          className={`mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 ${error.selectedProducts.length>0&&"bg-red-100"} `}
         >
           <option value="" disabled>
             Select a service
@@ -547,20 +546,21 @@ const ContactForm = () => {
           placeholder='Feel free to ask us ...'
           onChange={handleChange}
           
-          className="mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
-        />
+          className={`mt-1 block w-full border-stone-400 border  outline-none text-stone-950 p-2 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 ${error.message.length>0&&"bg-red-100"} `}
+          />
                   <p className='text-[red] ps-4 text-[10px] '>{error.message}</p>
 
       </div>
       <div className='w-full flex   justify-between'>
       <button className="text-stone-950 font-bold w-fit flex items-center p-1 gap-2  hover:scale-105 transition-all duration-300 ease-in-out border-stone-950 bg-opacity-20  bg-black rounded-full" type='button' onClick={()=>navigate("/products&services")} >
-<img src={logo} className="h-8 w-auto" alt="" />
+<img src="https://tltechnologies.net/assets/images/logo.svg" className="h-8 w-auto" alt="" />
 <h1>Products & Services</h1>
       </button>
 
         <button
           type="submit"
-          className="text-xl py-1 px-4 w-[170px] bg-[red] hover:px-2 transition-all duration-300 ease-in-out text-white font-semibold rounded-full outline-yellow-400 outline-1 border-2 border-black shadow-sm hover:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-opacity-50"
+          style={{backgroundImage:"radial-gradient(circle, #e81225, #ec1021, #f10d1d, #f50b19, #f90a13, #f91115, #f91617, #f91a19, #f42221, #ee2928, #e92f2e, #e33434)"}}
+          className="text-xl py-1 px-4 w-[170px] hover:px-2 transition-all duration-300 ease-in-out text-white font-semibold rounded-full outline-yellow-400 outline-1 border-2 border-black shadow-sm hover:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-opacity-50"
         >
           lets connect !
         </button>

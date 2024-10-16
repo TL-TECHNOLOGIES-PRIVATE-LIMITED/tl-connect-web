@@ -38,7 +38,7 @@ function App() {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-      }, 3500); // Adjust the timeout to match your animation duration
+      }, 1500); // Adjust the timeout to match your animation duration
     };
 
     handleRouteChange();
@@ -48,7 +48,7 @@ function App() {
     // Hide the loading spinner after the initial load
     const initialLoadTimeout = setTimeout(() => {
       setLoading(false);
-    }, 3500); // Adjust the timeout to match your initial loading spinner duration
+    }, 1500); // Adjust the timeout to match your initial loading spinner duration
 
     return () => clearTimeout(initialLoadTimeout); // Cleanup the timeout if the component unmounts
   }, []);

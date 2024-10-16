@@ -20,12 +20,12 @@ import tlbdf from '../Documents/TL-BEING-DIGITAL-FEATURES.pdf'
 
 export const documents = [
   { id: 1, name: 'TL SERVER GUARD ', file: sg },
-  { id: 2, name: 'TL EDUHUB', file: eh },
-  { id: 3, name: 'TL CLICK SHARE', file: cs },
+  { id: 2, name: 'TL EDUHUB ', file: eh },
+  { id: 3, name: 'TL CLICK SHARE ', file: cs },
   { id: 4, name: 'TL BEING DIGITAL (Features)', file: tlbdf },
   { id: 5, name: 'TL BEING DIGITAL (Plans)', file: tlbdp },
-  { id: 6, name: 'TL SLOTIZE ', file: null },
-  { id: 6, name: 'TL EVERY HOME ', file: null },
+  { id: 6, name: 'TL SLOTIZE - AMS  ', file: null },
+  { id: 6, name: 'TL EVERY HOME - mobile app ', file: null },
 ];
 
 export const services = [
@@ -73,7 +73,7 @@ export const services = [
     
     "image": ecommerce,
     "document":null,
-    "heading": "Mini E-Commerce Website (Being Digital) ",
+    "heading": "Mini E-Commerce Website  ",
     "Tagline": "Launch, Sell, Advertise All in One with TL.",
     "paragraph": "Elevate your online store effortlessly with TL - Mini Ecommerce Website / Being Digital. Plus, enhance your reach with integrated social media campaigns across seven platforms, all from one comprehensive solution. Boost your digital presence and drive growth with TL’s all-in-one eCommerce and advertising solution."
   },
@@ -182,10 +182,7 @@ export const taglines = [
   "⭐ TL SERVER GUARD: Advanced Server Monitoring System: Ensure your servers operate at peak efficiency with our powerful monitoring solution."
 ];
 export const questionsAndAnswers = [
-    { 
-      "question": "What is 'Being Digital,' and how can it help my business?", 
-      "answer": "'Being Digital' is a comprehensive digital marketing solution designed to boost your business\'s online presence. It integrates digital marketing strategies, content creation, and online optimization, offering customizable plans tailored to your unique needs. Our services help drive engagement, growth, and brand visibility."
-    },
+
     { 
       "question": "How does 'Being Digital' enhance my online presence?", 
       "answer": "'Being Digital' enhances your online presence by utilizing advanced digital marketing strategies like SEO, content creation, social media management, and more. We optimize your website, create engaging content, and ensure you reach your target audience effectively across various online platforms."
@@ -293,5 +290,107 @@ export const questionsAndAnswers = [
     {
       "question": "Can you help with SEO and SEM?",
       "answer": "Yes, we offer comprehensive SEO and SEM services to improve your website's visibility and search engine ranking. Our strategies include keyword research, on-page optimization, link building, and pay-per-click advertising to drive traffic and increase conversions."
-    }
+    },
+{ 
+  question: "What is TL BEING DIGITAL?", 
+  answer: "TL BEING DIGITAL is a comprehensive digital marketing solution that helps businesses launch their online presence in just 5 days through 7 different platforms." 
+},
+{ 
+  question: "What platforms does TL BEING DIGITAL support?", 
+  answer: "It supports social media marketing, website development, WhatsApp integration, YouTube video production, Instagram reels, and digital posters." 
+},
+{ 
+  question: "What is the setup fee for TL BEING DIGITAL?", 
+  answer: "The flat setup fee is just $99 or ₹5001." 
+},
+{ 
+  question: "What does the TL BEING DIGITAL site cover?", 
+  answer: "The TL BEING DIGITAL site covers domain registration, hosting, SSL certificate, SEO, Google Analytics integration, and much more." 
+},
+{
+  question: "Does TL BEING DIGITAL include SEO and Google Analytics?",
+  answer: "Yes! TL BEING DIGITAL includes SEO optimization to enhance your online visibility and Google Analytics integration for tracking website performance."
+},
+{
+  question: "Does the package include domain and hosting?",
+  answer: "Yes, the package includes domain registration, hosting, and an SSL certificate for security." 
+},
+{ 
+  question: "What are the pricing plans for TL BEING DIGITAL?", 
+  answer: "Plans start at $99/mo (₹5K/mo) for the basic package, which includes custom marketing sites, social media integration, and more." 
+},
+{ 
+  question: "What kind of digital marketing services are included?", 
+  answer: "We offer social media marketing, posters, YouTube videos, reels, ad boosts, and tailored campaigns, depending on the selected plan." 
+},
+{ 
+  question: "Can I upgrade my plan at any time?", 
+  answer: "Yes, you can upgrade your plan anytime to include more features like WhatsApp marketing, weekly campaigns, and dedicated marketing support." 
+},
+{ 
+  question: "How long does it take to set up TL BEING DIGITAL?", 
+  answer: "We can launch your digital presence in just 5 days, so your business can start growing fast!" 
+}
+
   ]
+export  const faqKeywords = [
+  // General
+  { topic: "general", keywords: ["Being Digital", "digital presence", "enhance online presence", "getting started", "what is", "how to", "setup fee"] },
+
+  // Digital Marketing
+  { topic: "digitalMarketing", keywords: ["SEO", "SEM", "social media marketing", "content marketing", "digital marketing services", "increase traffic", "engagement", "brand growth"] },
+
+  // WhatsApp Integration
+  { topic: "whatsappIntegration", keywords: ["WhatsApp integration", "direct communication", "customer engagement", "real-time interaction"] },
+
+  // Services Offered
+  { topic: "services", keywords: ["services included", "Being Digital package", "website development", "branding", "e-commerce solutions", "custom software", "mobile app development", "cloud solutions", "cybersecurity", "IT support"] },
+
+  // Products Offered
+  { topic: "products", keywords: ["Appointment Management System", "Being Digital suite", "Everyhome Application", "Server Monitoring System", "custom software solutions"] },
+
+  // Pricing and Plans
+  { topic: "pricing", keywords: ["pricing plans", "setup fee", "monthly plans", "upgrade plan", "digital marketing plans", "pricing details", "cost"] },
+
+  // Small Businesses and Startups
+  { topic: "smallBusiness", keywords: ["small businesses", "startups", "customizable plans", "budget-friendly", "affordable digital marketing", "business growth"] },
+
+  // Website Development
+  { topic: "websiteDevelopment", keywords: ["website development", "responsive websites", "user-friendly websites", "website design", "front-end design", "back-end development"] },
+
+  // E-commerce Solutions
+  { topic: "ecommerce", keywords: ["e-commerce solutions", "online stores", "payment gateway integration", "shopping experience", "increase sales"] },
+
+  // Mobile App Development
+  { topic: "mobileAppDevelopment", keywords: ["mobile app development", "iOS app", "Android app", "cross-platform apps", "Flutter development"] },
+
+  // Cybersecurity
+  { topic: "cybersecurity", keywords: ["cybersecurity", "risk assessment", "data protection", "network security", "incident response", "cyber threats"] },
+
+  // IT Support
+  { topic: "itSupport", keywords: ["IT support", "technical assistance", "network management", "remote support", "on-site support", "IT infrastructure"] },
+
+  // Cloud Solutions
+  { topic: "cloudSolutions", keywords: ["cloud solutions", "cloud computing", "cloud migration", "cloud management", "optimize resources"] },
+
+  // Custom Software Development
+  { topic: "customSoftware", keywords: ["custom software", "software development", "tailored solutions", "business requirements", "customized software"] },
+
+  // Branding
+  { topic: "branding", keywords: ["branding", "brand identity", "logo design", "brand guidelines", "brand story", "impactful brand"] },
+
+  // Video Editing
+  { topic: "videoEditing", keywords: ["video editing", "promotional videos", "corporate videos", "video content", "video communication"] },
+
+  // SEO and SEM
+  { topic: "seoSem", keywords: ["SEO", "SEM", "search engine optimization", "keyword research", "link building", "pay-per-click advertising", "increase conversions"] },
+
+  // Appointment Management
+  { topic: "appointmentManagement", keywords: ["appointment management", "scheduling system", "automated reminders", "calendar integration", "rescheduling options"] },
+
+  // Smart Home
+  { topic: "smartHome", keywords: ["smart home management", "Everyhome application", "home automation", "smart devices", "remote access"] },
+
+  // Server Monitoring
+  { topic: "serverMonitoring", keywords: ["server monitoring", "performance metrics", "alert notifications", "server performance", "real-time monitoring"] }
+];

@@ -1,14 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ReactDOM from 'react-dom';
-import bg from '../img/css-pattern-by-magicpattern.png'
-const SuccessModal = ({ showModal, closeModal, modalType, message }) => {
+import { MdNoteAlt } from "react-icons/md";
+
+const SuccessModal = ({ showModal, closeModal, modalType, message ,url}) => {
   if (!showModal) return null;
 
   // Automatically close the modal after 5 seconds
   setTimeout(() => {
     closeModal();
-  }, 5000);
+      
+    isSuccess&&window.open(url, '_blank');
+  }, 6000);
 
   const isSuccess = modalType === 'success';
 
@@ -44,11 +47,20 @@ const SuccessModal = ({ showModal, closeModal, modalType, message }) => {
           {message} 
         </p >
         
-        <p className='text-sm mb-2'>
+        <p className='text-sm mb-2 flex'>
 
-          {isSuccess ? 'We’ll get back to you soon.' : 'Please try again later.'}
+          {isSuccess ? ' ' : 'Please try again later.'}
         </p>
-        <p className="font-bold">{isSuccess?"thank you, visit again":"note  : Please Check all required fields."}</p>
+        <p className="font-bold">
+  {isSuccess 
+    ? "You’ll be redirected to WhatsApp for assistance" 
+    : (
+      <div className='flex gap-3 justify-start items-center'>
+        <MdNoteAlt /> Please check all required fields.
+      </div>
+    )
+  }
+</p>
         <div className="flex justify-between space-x-4">
           
          
