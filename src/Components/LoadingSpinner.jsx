@@ -1,29 +1,42 @@
-// LoadingSpinner.js
 import React from 'react';
 import logo from '../img/Logo-TL.png'
 
 const FuturisticLoadingScreen = () => {
   return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center bg-slate-900 z-50 overflow-hidden">
-      {/* Hexagonal Grid Background */}
-      <div className="absolute inset-0 opacity-20">
-        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <pattern id="hexagons" width="50" height="43.4" patternUnits="userSpaceOnUse">
-            <path 
-              d="M25 0 L50 14.4 L50 43.4 L25 57.8 L0 43.4 L0 14.4 Z" 
-              fill="none" 
-              stroke="#4F46E5" 
-              strokeWidth="0.5"
-            >
-              <animate 
-                attributeName="stroke-opacity" 
-                values="0.5;1;0.5" 
-                dur="3s" 
-                repeatCount="indefinite"
-              />
-            </path>
-          </pattern>
-          <rect width="100%" height="100%" fill="url(#hexagons)" />
+    <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50 overflow-hidden">
+      {/* Wave Background */}
+      <div className="absolute inset-0 opacity-10">
+        <svg className="w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
+          <path 
+            fill="#4F46E5" 
+            fillOpacity="0.2"
+            d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,224C672,213,768,171,864,149.3C960,128,1056,128,1152,149.3C1248,171,1344,213,1392,234.7L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          >
+            <animate
+              attributeName="d"
+              dur="10s"
+              repeatCount="indefinite"
+              values="
+                M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,224C672,213,768,171,864,149.3C960,128,1056,128,1152,149.3C1248,171,1344,213,1392,234.7L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                M0,160L48,170.7C96,181,192,203,288,213.3C384,224,480,224,576,213.3C672,203,768,181,864,181.3C960,181,1056,203,1152,192C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,224C672,213,768,171,864,149.3C960,128,1056,128,1152,149.3C1248,171,1344,213,1392,234.7L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            />
+          </path>
+          <path 
+            fill="#4F46E5" 
+            fillOpacity="0.1"
+            d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,266.7C672,267,768,245,864,224C960,203,1056,181,1152,181.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          >
+            <animate
+              attributeName="d"
+              dur="15s"
+              repeatCount="indefinite"
+              values="
+                M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,266.7C672,267,768,245,864,224C960,203,1056,181,1152,181.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                M0,128L48,144C96,160,192,192,288,197.3C384,203,480,181,576,181.3C672,181,768,203,864,208C960,213,1056,203,1152,192C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,266.7C672,267,768,245,864,224C960,203,1056,181,1152,181.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            />
+          </path>
         </svg>
       </div>
 
@@ -78,18 +91,9 @@ const FuturisticLoadingScreen = () => {
 
         {/* Company Name */}
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold text-white tracking-wider mb-2">
+          <h1 className="text-3xl font-bold text-red-600 tracking-wider mb-2">
             TL BEING DIGITAL
           </h1>
-          {/* Futuristic Loading Bar */}
-          <div className="w-64 h-1.5 bg-slate-800 rounded-full overflow-hidden">
-            <div className="h-full w-full bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full animate-shimmer" 
-                 style={{
-                   backgroundSize: '200% 100%',
-                   animation: 'shimmer 2s linear infinite'
-                 }}
-            />
-          </div>
         </div>
 
         {/* Loading Status */}
