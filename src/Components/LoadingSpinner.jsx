@@ -91,7 +91,7 @@ const FuturisticLoadingScreen = () => {
 
         {/* Company Name */}
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold text-red-600 tracking-wider mb-2">
+          <h1 className="text-3xl font-bold text-red-700 tracking-wider mb-2">
             TL BEING DIGITAL
           </h1>
         </div>
@@ -107,7 +107,7 @@ const FuturisticLoadingScreen = () => {
               />
             ))}
           </div>
-          <span className="text-sm font-medium tracking-wider">LOADING SYSTEM</span>
+          
         </div>
       </div>
 
