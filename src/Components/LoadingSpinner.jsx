@@ -6,7 +6,7 @@ const LoadingSpinner = () => {
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center gap-6 bg-white z-50">
       {/* Logo Container with Pulse */}
-      <div className="relative w-20 h-20 animate-pulse">
+      <div className="relative w-24 h-24 animate-pulse">
         <img src={logo} alt="logo tl" className="h-full w-auto" />
         
         {/* Circular SVG Animation */}
@@ -38,7 +38,7 @@ const LoadingSpinner = () => {
 
       {/* Company Name with Typing Effect */}
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-gray-800 mb-1 relative overflow-hidden">
+        <h1 className="text-3xl font-bold text-gray-800 mb-1 relative overflow-hidden">
           TL BEING DIGITAL
           <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500">
             <span className="absolute top-0 left-0 w-full h-full bg-white animate-typewriter"></span>
