@@ -593,7 +593,7 @@ const ContactForm = () => {
               <FaLocationDot
               className=" md:text-2xl text-lg hover:text-black transition-all duration-300 ease-in-out text-blue-600" />
             }
-            link={"https://maps.app.goo.gl/ruFTK9hWTrk4no1f7"}
+            link={"https://maps.app.goo.gl/udfxj53LVog3yR9p9"}
           />
           <SocialMediaIcons
             icon={
@@ -611,7 +611,7 @@ const ContactForm = () => {
             icon={
               <FaYoutube className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-red-500" />
             }
-            link={"https://www.youtube.com/channel/UCUzgPAoF6HEyR2eH9vtj-5w?sub_confirmation=1"}
+            link={"https://www.youtube.com/@tltechnologiespvtltd-sangi"}
           />
            <SocialMediaIcons
             icon={
