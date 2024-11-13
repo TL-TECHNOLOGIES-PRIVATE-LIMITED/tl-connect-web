@@ -7,13 +7,13 @@ const SuccessModal = ({ showModal, closeModal, modalType, message ,url}) => {
   if (!showModal) return null;
 
   // Automatically close the modal after 5 seconds
+  const isSuccess = modalType === 'success';
   setTimeout(() => {
     closeModal();
       
     isSuccess&&window.open(url, '_blank');
-  }, 6000);
-
-  const isSuccess = modalType === 'success';
+    // alert(isSuccess,url)
+  }, 1000);
 
   return ReactDOM.createPortal(
     <motion.div
