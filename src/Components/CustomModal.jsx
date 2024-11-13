@@ -13,7 +13,7 @@ const SuccessModal = ({ showModal, closeModal, modalType, message ,url}) => {
       
     isSuccess&&window.open(url, '_blank');
     // alert(isSuccess,url)
-  }, 1000);
+  }, 5000);
 
   return ReactDOM.createPortal(
     <motion.div
