@@ -186,7 +186,7 @@ const ChatBotModal = () => {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-full shadow-lg hover:from-indigo-700 hover:to-blue-600 transition-all duration-300 flex items-center justify-center backdrop-blur-sm border border-white/20 hover:scale-105 transform"
+        className="fixed z-[1000] bottom-4 right-4 md:bottom-6 md:right-6 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-full shadow-lg hover:from-indigo-700 hover:to-blue-600 transition-all duration-300 flex items-center justify-center backdrop-blur-sm border border-white/20 hover:scale-105 transform"
         aria-label="Open chat"
       >
         <IoChatbubbleEllipses className="w-6 h-6 md:w-7 md:h-7" />
