@@ -6,6 +6,7 @@ import ContactForm from "../Components/contactForm";
 import CookieConsent from "../Components/cookieComponents";
 import { Suspense } from "react";
 import LoadingSpinner from "../Components/LoadingSpinner";
+import ChatBotModal from "../Components/ChatBot";
 
 function LandingPage() {
 
@@ -25,6 +26,7 @@ function LandingPage() {
 
       <div className="bg-stone-950 bg-opacity-10 h-full w-full relative flex flex-col overflow-y-auto">
         <CookieConsent />
+        <ChatBotModal/>
 
         <div className=" md:w-fit w-full  transform -translate-x-1/2 left-1/2 absolute ">
           <Navbar />
@@ -42,7 +44,7 @@ function LandingPage() {
               <ContactForm />
             </div>
           </div>
-          <p className="md:mt-4 py-2  text-center w-full bg-black md:bg-transparent  md:text-md text-xs  text-white font-bold">&#169; {" "}COPYRIGHT 2024 - <a href="http://sangitl2020-001-site7.atempurl.com/" target="_blank">TL TECHNOLOGIES</a>. ALL RIGHTS  RESERVED.</p>
+          <p className="md:mt-4 py-2  text-center w-full bg-black md:bg-transparent  md:text-md text-xs  text-white font-bold">&#169; {" "}COPYRIGHT 2024 - <a href="http://tltechnologies.net" rel="noreferrer" target="_blank">TL TECHNOLOGIES</a>. ALL RIGHTS  RESERVED.</p>
         </div>
       </div>
     </div>

@@ -334,109 +334,63 @@ export const taglines = [
 
 //   ]
 
-export const questionsAndAnswers = [
+export const faqData = [
   { 
-    "question": "What is 'Being Digital,' and how can it benefit my business?", 
-    "answer": "'Being Digital' is a comprehensive digital marketing solution designed to boost your business's online presence. It includes services like SEO, social media management, and content creation to drive growth." 
+    question: "What is 'Being Digital,' and how can it benefit my business?",
+    answer: "'Being Digital' is a comprehensive digital marketing solution designed to boost your business's online presence. It includes services like SEO, social media management, and content creation to drive growth.",
+    keywords: ["being digital", "digital marketing", "online presence", "SEO", "social media", "content creation", "business growth"]
   },
   { 
-    "question": "How does 'Being Digital' improve my online presence?", 
-    "answer": "We enhance your online presence through optimized websites, engaging social media content, and targeted campaigns across channels like Facebook, Instagram, and LinkedIn." 
+    question: "How does 'Being Digital' improve my online presence?",
+    answer: "We enhance your online presence through optimized websites, engaging social media content, and targeted campaigns across channels like Facebook, Instagram, and LinkedIn.",
+    keywords: ["online presence", "websites", "social media", "campaigns", "Facebook", "Instagram", "LinkedIn"]
   },
   { 
-    "question": "Can 'Being Digital' integrate with WhatsApp for business?", 
-    "answer": "Yes! We offer WhatsApp integration to improve customer communication, personalized marketing, and real-time support." 
+    question: "Can 'Being Digital' integrate with WhatsApp for business?",
+    answer: "Yes! We offer WhatsApp integration to improve customer communication, personalized marketing, and real-time support.",
+    keywords: ["WhatsApp", "integration", "customer communication", "personalized marketing", "real-time support"]
   },
   { 
-    "question": "What services are included in the 'Being Digital' package?", 
-    "answer": "The package includes SEO, content creation, social media management, online ads, and reputation management tailored to your business." 
+    question: "What services are included in the 'Being Digital' package?",
+    answer: "The package includes SEO, content creation, social media management, online ads, and reputation management tailored to your business.",
+    keywords: ["services", "SEO", "content creation", "social media management", "online ads", "reputation management"]
   },
   { 
-    "question": "How does 'Being Digital' drive engagement and growth for my brand?", 
-    "answer": "By creating compelling content and executing data-driven campaigns, we attract, engage, and retain your audience, driving traffic and conversions." 
+    question: "How does 'Being Digital' drive engagement and growth for my brand?",
+    answer: "By creating compelling content and executing data-driven campaigns, we attract, engage, and retain your audience, driving traffic and conversions.",
+    keywords: ["engagement", "growth", "brand", "content", "campaigns", "traffic", "conversions"]
   },
   { 
-    "question": "Is 'Being Digital' suitable for small businesses and startups?", 
-    "answer": "Absolutely! We offer customizable packages for businesses of all sizes, helping you grow within your budget." 
+    question: "Is 'Being Digital' suitable for small businesses and startups?",
+    answer: "Absolutely! We offer customizable packages for businesses of all sizes, helping you grow within your budget.",
+    keywords: ["small business", "startups", "customizable packages", "budget", "growth"]
   },
   { 
-    "question": "How do you customize the digital strategy for my business needs?", 
-    "answer": "We analyze your business goals, target audience, and market to tailor a digital strategy that aligns with your objectives." 
+    question: "What sets 'Being Digital' apart from other digital marketing services?",
+    answer: "Our integrated approach covers all aspects of digital marketing under one cohesive strategy, building a sustainable online presence.",
+    keywords: ["digital marketing", "integrated approach", "strategy", "online presence"]
   },
   { 
-    "question": "What sets 'Being Digital' apart from other digital marketing services?", 
-    "answer": "Our integrated approach covers all aspects of digital marketing under one cohesive strategy, building a sustainable online presence." 
+    question: "How can I get started with 'Being Digital'?",
+    answer: "Visit connect.tltechnologies.net to explore our plans/price and schedule a consultation. Plans start from $99 (INR 5,000).",
+    keywords: ["get started", "plans", "price", "consultation", "cost"]
   },
   { 
-    "question": "How can I get started with 'Being Digital'?", 
-    "answer": "Visit connect.tltechnologies.net to explore our plans/price and schedule a consultation. Plans start from $99 (INR 5,000)." 
+    question: "What services does TL TECHNOLOGIES offer?",
+    answer: "We offer Digital Marketing, Website Development, Branding, IT Consulting, and Custom Software Development, among others.",
+    keywords: ["services", "digital marketing", "website development", "branding", "IT consulting", "software development"]
   },
   { 
-    "question": "Can I track the results of my digital marketing efforts?", 
-    "answer": "Yes, we provide detailed analytics and reports to help you monitor the performance of your campaigns." 
+    question: "What products does TL TECHNOLOGIES provide?",
+    answer: "Our products include: TL SLOTIZE: Appointment Management System. TL Being Digital: Digital marketing suite. Everyhome Mobile App: Home management app. Server Guard: Server monitoring tool.",
+    keywords: ["products", "appointment management", "digital marketing", "mobile app", "server monitoring"]
   },
   { 
-    "question": "What services does TL TECHNOLOGIES offer?", 
-    "answer": "We offer Digital Marketing, Website Development, Branding, IT Consulting, and Custom Software Development, among others." 
-  },
-  { 
-    "question": "What products does TL TECHNOLOGIES provide?", 
-    "answer": "Our products include: TL SLOTIZE: Appointment Management System. TL Being Digital: Digital marketing suite. Everyhome Mobile App: Home management app. Server Guard: Server monitoring tool." 
-  },
-  { 
-    "question": "How can I contact TL TECHNOLOGIES?", 
-    "answer": "Call us at +91 9061432814 or email info@tltechnologies.net. We serve clients globally." 
-  },
-  { 
-    "question": "Can you provide more details about your Digital Marketing services?", 
-    "answer": "Our services cover SEO, SEM, content marketing, and social media marketing, customized to fit your business goals." 
-  },
-  { 
-    "question": "What does your Website Development service include?", 
-    "answer": "We create responsive, user-friendly websites with complete front-end and back-end solutions, ensuring seamless user experiences." 
-  },
-  { 
-    "question": "How can your E-commerce Solutions benefit my business?", 
-    "answer": "We build robust online stores, integrate secure payment gateways, and optimize the shopping experience to increase sales." 
-  },
-  { 
-    "question": "What types of Mobile App Development do you offer?", 
-    "answer": "We develop cross-platform apps for iOS and Android, ensuring a user-friendly experience across devices." 
-  },
-  { 
-    "question": "What kind of IT Support do you provide?", 
-    "answer": "We offer both remote and on-site technical support, network management, and system troubleshooting." 
-  },
-  { 
-    "question": "Can you customize software to fit my business needs?", 
-    "answer": "Yes! We build tailored software solutions to meet your unique business requirements." 
-  },
-  { 
-    "question": "How does your Appointment Management System work?", 
-    "answer": "It helps streamline bookings with features like automated reminders, calendar syncing, and easy rescheduling." 
-  },
-  { 
-    "question": "What is the Everyhome Application?", 
-    "answer": "Everyhome connects service providers and customers, offering seamless management of home-related tasks and services." 
-  },
-  { 
-    "question": "What does the Server Monitoring System offer?", 
-    "answer": "It provides real-time monitoring and alerts for server performance, ensuring smooth operations across cloud environments." 
-  },
-  { 
-    "question": "How can your Branding services benefit my business?", 
-    "answer": "We create a strong brand identity through logo design, storytelling, and marketing strategies that resonate with your audience." 
-  },
-  { 
-    "question": "What does your Video Editing service include?", 
-    "answer": "We provide professional video editing for ads, promos, and corporate videos, tailored to your specific needs." 
-  },
-  { 
-    "question": "Can you help with SEO and SEM?", 
-    "answer": "Yes, we offer comprehensive SEO and SEM services to boost your search engine rankings and visibility online." 
+    question: "How can I contact TL TECHNOLOGIES?",
+    answer: "Call us at +91 9061432814 or email info@tltechnologies.net. We serve clients globally.",
+    keywords: ["contact", "phone", "email", "global service"]
   }
 ];
-
 
 
 export  const faqKeywords = [
