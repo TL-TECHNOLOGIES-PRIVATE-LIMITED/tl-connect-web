@@ -16,7 +16,7 @@ function Navbar() {
       <div className="font-bold w-full  flex flex-wrap  justify-between items-center">
         <div className="flex justify-between w-full items-end gap-4">
           <div className="text-3xl h-fit w-fit rounded-full text-[50px]">
-            <img src={logo} alt="" className="h-14 w-auto" />
+            <img src={logo} alt="" className="h-20 w-auto" />
           </div>
           <div className="md:text-[36px] text-xl font-bold text-white  drop-shadow-md">
             TL TECHNOLOGIES
