@@ -73,43 +73,48 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     let hasError = false;
     let newError = { ...error };
-
+  
     // Validate the name field
     const namePattern = /^[A-Za-z\s]{3,}$/;
-
     if (!namePattern.test(formData.name)) {
       newError.name = "Name cannot be empty.";
       hasError = true;
     } else {
       newError.name = "";
     }
-
+  
     // Validate the email field
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(formData.email)) {
       newError.email = "Email must be in the format example@domain.com.";
-      hasError = false;
+      hasError = true;
     } else {
       newError.email = "";
     }
-    
-    // Validate the phone field
-    const normalizedPhoneNumber = phone.replace(/\D/g, "");
-
-    // Example: US phone numbers with +1 country code should be followed by 10 digits
-    const usPhonePattern = /^1\d{10}$/;  // Matches +1 followed by 10 digits
-    const internationalPhonePattern = /^\d{4,12}$/; // Matches international numbers with or without country code
   
-    // Validate phone number
-    if (usPhonePattern.test(normalizedPhoneNumber) || internationalPhonePattern.test(normalizedPhoneNumber)) {
-      newError.phone = ""; // Valid phone number
-    } else {
-      newError.phone = "Phone number should only contain numbers."; // Invalid phone number
-      hasError = true;
-    }
+    // Validate the phone field
+    const normalizedPhoneNumber = phone.replace(/\D/g, ""); // Remove non-numeric characters
+const minPhoneLength = 10;
+
+if (normalizedPhoneNumber.length < minPhoneLength) {
+  newError.phone = "Phone number should have at least 10 digits.";
+  hasError = true;
+} else {
+  // You can keep the pattern checks if you want to validate formats, but you might not need it for the min length check
+  const usPhonePattern = /^1\d{10}$/;  // Matches +1 followed by 10 digits
+  const internationalPhonePattern = /^\d{4,12}$/; // Matches international numbers with or without country code
+  
+  if (usPhonePattern.test(normalizedPhoneNumber) || internationalPhonePattern.test(normalizedPhoneNumber)) {
+    newError.phone = ""; // Valid phone number
+  } else {
+    newError.phone = "Phone number should contain only numbers and valid format.";
+    hasError = true;
+  }
+}
+  
     // Validate the message field
     if (formData.message.length <= 0) {
       newError.message = "Message cannot be blank.";
@@ -117,57 +122,50 @@ const ContactForm = () => {
     } else {
       newError.message = "";
     }
-
+  
     // Validate the business model field
-    if (!formData.businessModel.length>0) {
+    if (formData.businessModel.length <= 0) {
       newError.businessModel = "Please select a business model";
       hasError = true;
     } else {
       newError.businessModel = "";
     }
-    // Validate the business model field
-    if (!selectedProducts.length>0) {
-      newError.selectedProducts = "Please choose a product or service.";
-      if(error.items.length>0)
+  
+    // Validate the selected products field
+    if (selectedProducts.length <= 0) {
+      newError.selectedProducts = "Please choose a product.";
       hasError = true;
     } else {
       newError.selectedProducts = "";
     }
-    // Validate the business model field
-    if (!items.length>0) {
-      newError.items = "Please choose a product or service.";
-      if(error.selectedProducts.length>0)
-        hasError = true;
+  
+    // Validate the selected services field
+    if (items.length <= 0) {
+      newError.items = "Please choose a service.";
+      hasError = true;
     } else {
       newError.items = "";
     }
-
-    // Validate the services field
-    if (formData.services === '') {
-      newError.services = "Service selection is mandatory.";
-      hasError = true;
-    } else {
-      newError.services = "";
-    }
-
+  
     // Validate the location field
-    if (formData.location.length<=0) {
+    if (formData.location.length <= 0) {
       newError.location = "Country selection is required.";
       hasError = true;
     } else {
       newError.location = "";
     }
-
+  
     setError(newError);
-
+  
+    // If there are any errors, stop form submission
     if (hasError) {
       setMessage('There was an issue with your submission');
       setModalType('error');
       setShowModal(true);
-      return; // Stop form submission if there's an error
+      return;
     }
-
-    // If no errors, proceed with form submission
+  
+    // Proceed with form submission
     const url = `https://api.whatsapp.com/send?phone=919061432814&text=${encodeURIComponent(
       `*Name:* ${formData.name}\n` +
       `*Email:* ${formData.email}\n` +
@@ -178,16 +176,18 @@ const ContactForm = () => {
       `*Services:*\n${items.map(service => `• ${service}`).join("\n")}\n\n` +
       `*Message:* ${formData.message}`
     )}`;
-    
-
-    
+  
+    setWurl(url); // Set the WhatsApp URL
+  
     setShowModal(true); // Show the success modal
     setMessage('We’ve received your submission and will contact you shortly.');
     setModalType('success');
-    setShowModal(true);
-    
-    setWurl(url)
-    console.log("Form submitted successfully:", formData);
+  
+    // Redirect to WhatsApp after a small delay to allow the modal message to show
+    setTimeout(() => {
+      //redirect to new tab
+        window.open(url, '_blank');
+    }, 2000); // Adjust the delay (2000ms = 2 seconds)
   };
 
   const removeProduct = (product) => {
