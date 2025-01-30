@@ -164,21 +164,30 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const fullPhoneNumber = `+${phoneNumber}`;
+  
     if (
       fullPhoneNumber.length > 0 &&
       name.length > 0 &&
       items.length > 0 &&
-      businessModal.length>0
+      businessModal.length > 0
     ) {
-      const wholeMessage = `Name: ${name}%0AEmail: ${email}%0APhone Number: ${fullPhoneNumber}%0ABusiness modal :${businessModal} %0AServices: ${items.join(
-        ","
-      )} %0ALocation : ${location.join(",")}%0AMessage: ${message} `;
-      console.log(wholeMessage);
-      const whatsappUrl = `https://wa.me/919061432814?text=${wholeMessage}`;
+      // Construct the main message with emojis
+      const wholeMessage = `👤 *Name:* ${name}%0A📧 *Email:* ${email}%0A📞 *Phone:* ${fullPhoneNumber}%0A🌍 *Country:* ${country}%0A💼 *Business:* ${businessModal}%0A🛍️ *Products:* ${products.join(", ")}%0A🔧 *Services:* ${items.join(", ")}%0A📝 *Message:* ${message}`;
+  
+      // Add the extra message (redirection link) with emoji
+      const extraMessage = "🌟 Let's connect: https://connect.tltechnologies.net/";
+      const finalMessage = `${wholeMessage}%0A%0A${extraMessage}`;
+  
+      // Construct the WhatsApp URL
+      const whatsappUrl = `https://wa.me/919061432814?text=${finalMessage}`;
+  
+      // Log the URL for debugging
+      console.log(whatsappUrl);
+  
+      // Open the WhatsApp URL in a new tab
       window.open(whatsappUrl, "_blank");
-    }
-    else{
-      alert("Please check all field")
+    } else {
+      alert("Please check all fields");
     }
   };
 

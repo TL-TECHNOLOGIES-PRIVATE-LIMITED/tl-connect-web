@@ -167,15 +167,19 @@ if (normalizedPhoneNumber.length < minPhoneLength) {
   
     // Proceed with form submission
     const url = `https://api.whatsapp.com/send?phone=919061432814&text=${encodeURIComponent(
-      `*Name:* ${formData.name}\n` +
-      `*Email:* ${formData.email}\n` +
-      `*Phone:* +${parseInt(phone)}\n` +
-      `*Country:* ${formData.location}\n` +
-      `*Business:* ${formData.businessModel}\n` +
-      `*Products:*\n${selectedProducts.map(product => `• ${product}`).join("\n")}\n` +
-      `*Services:*\n${items.map(service => `• ${service}`).join("\n")}\n\n` +
-      `*Message:* ${formData.message}`
+      `👤 *Name:* ${formData.name}\n` +
+      `📧 *Email:* ${formData.email}\n` +
+      `📞 *Phone:* +${parseInt(phone)}\n` +
+      `🌍 *Country:* ${formData.location}\n` +
+      `💼 *Business:* ${formData.businessModel}\n` +
+      `🛍️ *Products:*\n${selectedProducts.map(product => `• ${product}`).join("\n")}\n` +
+      `🔧 *Services:*\n${items.map(service => `• ${service}`).join("\n")}\n\n` +
+      `📝 *Message:* ${formData.message}\n\n` +
+      `🌟 Let's connect: https://connect.tltechnologies.net/`
     )}`;
+    
+    // Open the WhatsApp URL in a new tab
+    window.open(url, "_blank");
   
     setWurl(url); // Set the WhatsApp URL
   
